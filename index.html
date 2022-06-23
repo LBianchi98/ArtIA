@@ -1,10 +1,18 @@
 <html>
     <head>
-    <script src="script.js"></script>
     </head>
     <body>
         <div id="liveView" class="videoView">
             <video id="webcam" autoplay></video>
-          </div>
+        </div>
+        <p>L'oggetto è:<span id="webcamItem"></span></p>
+    <!-- Load TensorFlow.js. This is required to use coco-ssd model. -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
+    <!-- Load the coco-ssd model. -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"> </script>
+
+    
+    <!-- Import the page's JavaScript to do some stuff -->
+    <script src="script.js"></script>
     </body>
 </html>
