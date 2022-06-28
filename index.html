@@ -1,18 +1,37 @@
 <html>
-    <head>
-    </head>
-    <body>
-        <div id="liveView" class="videoView">
-            <video id="webcam" autoplay></video>
-        </div>
-        <p>L'oggetto è:<span id="webcamItem"></span></p>
-    <!-- Load TensorFlow.js. This is required to use coco-ssd model. -->
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
-    <!-- Load the coco-ssd model. -->
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"> </script>
+  <head> 
+    <link rel="stylesheet" href="./css/style.css">
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <h1 class="ArtIA">ArtIA</h1> 
+    <div id="paginaWebcam"  > 
 
-    
+        <p>Fai vedere nella webcam l'oggetto che desideri cercare
+            nella nostra collezione artistica
+        </p>
+      <div id="liveView" class="videoView">
+        <video id="webcam" autoplay></video>
+      </div>
+      <p>L'oggetto è: <span id="webcamItem" style="font-style: italic;"></span></p>
+     
+      <button id="bottone" class="Search">Cerca immagini</button>
+   
+    </div>
+
+
+    <div id="paginaRisultati" style="visibility: hidden; display: none;">
+        <p>Immagini della nostra collezione simili a <span id="webcamItem" style="font-style: italic;">storare label</span>
+        </p>
+
+        <button id="bottone" class="newSearch">Nuova ricerca</button>
+    </div>
+    <!-- Load TensorFlow.js. This is required to use coco-ssd model. -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <!-- Load the coco-ssd model. -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+
     <!-- Import the page's JavaScript to do some stuff -->
-    <script src="/scripts/script.js"></script>
-    </body>
+    <script src="./scripts/script.js"></script>
+  </body>
 </html>

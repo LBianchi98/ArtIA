@@ -1,0 +1,61 @@
+h1.ArtIA {
+    padding-top: 12 px;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#paginaWebcam,
+#paginaRisultati {
+    text-align: center;
+}
+
+#paginaWebcam p,
+#paginaRisultati p {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/*
+
+#bottone {
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font: bold 17px Arial, Helvetica, sans-serif;
+    color: #fff;
+    padding: 10px 20px;
+    border: solid 1px #0076b3;
+    background: #0095cd;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+#bottone:active {
+    position: relative;
+    top: 1px;
+    }
+
+    #bottone:hover {
+        background: #0078a5;
+        }*/
+
+#bottone {
+    padding: 14px 28px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    border: 2px solid #555555;
+}
+
+#bottone:hover {
+    background-color: #555555;
+    color: white;
+}
