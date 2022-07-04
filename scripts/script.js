@@ -1,9 +1,19 @@
 var model = undefined;
+
+const imgs = document.getElementsByClassName('img');
 cocoSsd.load().then(function (loadedModel) {
-  model = loadedModel;
+    var j=0;
+    model = loadedModel;
+    for(var i=0; i<imgs.length; i++){
+        model.detect(imgs[i]).then(function (predictions) {
+            var p = document.getElementsByClassName("imglabel");
+            console.log(i);
+            p[j].innerHTML = predictions[0].class;
+            j++;
+        });
+    }
 });
 
-    
 const video = document.getElementById('webcam');
 const liveView = document.getElementById('liveView');
 if (navigator.mediaDevices.getUserMedia) {
@@ -32,4 +42,7 @@ function predictWebcam() {
     });
     window.requestAnimationFrame(predictWebcam);
   }
+function searchLabel(){
+    //implementare il cambio di pagina
+}
   
