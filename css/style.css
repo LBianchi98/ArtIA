@@ -11,6 +11,7 @@ h1.ArtIA {
 
 #paginaWebcam p,
 #paginaRisultati p {
+    padding-top: 20px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -64,7 +65,7 @@ h1.ArtIA {
 .griglia-quadri{
     display: flex;
     flex-wrap: wrap;
-    padding-top: 50px;
+    padding-top: 30px;
     padding-bottom: 50px;
 }
 
@@ -73,4 +74,9 @@ h1.ArtIA {
     max-width: 33.33%;
     padding-left: 16px;
     padding-right: 16px;
+}
+
+.nascosta{
+    visibility: hidden;
+    display: none;
 }

@@ -5,7 +5,7 @@
   </head>
   <body>
     <h1 class="ArtIA">ArtIA</h1> 
-    <div id="paginaWebcam"  > 
+    <div id="paginaWebcam"> 
 
         <p>Fai vedere nella webcam l'oggetto che desideri cercare
             nella nostra collezione artistica
@@ -15,12 +15,12 @@
       </div>
       <p>L'oggetto è: <span id="webcamItem" style="font-style: italic;"></span></p>
      
-      <button id="bottone" class="Search" onsearch="searchLabel()">Cerca immagini</button>
+      <button id="bottone" class="Search" onclick="searchLabel()">Cerca immagini</button>
    
     </div>
 
 
-    <div id="paginaRisultati" style="visibility: hidden; display: none;">
+    <div id="paginaRisultati" class="nascosta">
         <p>Immagini della nostra collezione simili a <span id="webcamItem" style="font-style: italic;">storare label</span>
         </p>
 
@@ -39,7 +39,7 @@
                 </div>
         </div>
 
-        <button id="bottone" class="newSearch">Nuova ricerca</button>
+        <button id="bottone" class="newSearch" onclick="searchLabel()">Nuova ricerca</button>
     </div>
     <!-- Load TensorFlow.js. This is required to use coco-ssd model. -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>

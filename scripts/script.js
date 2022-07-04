@@ -1,4 +1,5 @@
 var model = undefined;
+//const per tenere variabile di label attuale sia per scrivere in alto che per confrontare
 
 const imgs = document.getElementsByClassName('img');
 cocoSsd.load().then(function (loadedModel) {
@@ -44,5 +45,10 @@ function predictWebcam() {
   }
 function searchLabel(){
     //implementare il cambio di pagina
+    var spag = document.getElementById("paginaWebcam")
+    spag.classList.toggle("nascosta");
+
+    var rpag = document.getElementById("paginaRisultati")
+    rpag.classList.toggle("nascosta");
+
 }
-  
