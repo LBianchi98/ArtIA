@@ -11,8 +11,13 @@ h1.ArtIA {
 
 #paginaWebcam p,
 #paginaRisultati p {
-    padding-top: 20px;
     font-family: Arial, Helvetica, sans-serif;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+#paginaRisultati .sottotitolo {
+    padding-top: 20px;
 }
 
 /*
@@ -62,21 +67,34 @@ h1.ArtIA {
 }
 
 
-.griglia-quadri{
+.griglia-quadri {
     display: flex;
     flex-wrap: wrap;
     padding-top: 30px;
     padding-bottom: 50px;
 }
 
-.quadro{
+.quadro {
     flex-basis: 33.33%;
     max-width: 33.33%;
     padding-left: 16px;
     padding-right: 16px;
 }
 
-.nascosta{
+.nascosta {
     visibility: hidden;
     display: none;
+}
+
+
+.quadro .container .imgtitolo {
+    box-sizing: border-box;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+
+.quadro .container .imgtitolo{
+    padding-top: 0px;
+    padding-bottom: 0px;
 }

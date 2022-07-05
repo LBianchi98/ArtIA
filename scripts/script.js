@@ -36,10 +36,14 @@ function predictWebcam() {
         for (let n = 0; n < predictions.length; n++) {
             
             if (predictions[n].score > 0.9) /* da vedere il fattore */ {
-               var p = document.getElementById("webcamItem");
-                p.innerHTML = predictions[n].class;    
+                var p = document.getElementById("webcamItem");
+                p.innerHTML = predictions[n].class;
+                
+                //store label da passare?
+
             }
         }
+
     });
     window.requestAnimationFrame(predictWebcam);
   }
@@ -52,7 +56,7 @@ function searchLabel(){
     var rpag = document.getElementById("paginaRisultati")
     rpag.classList.toggle("nascosta");
     if(ricerca){
-        fetch("http://localhost/config.php")
+        fetch("./server/config.php")
             .then(response =>{
                 return response.json();
             })
@@ -65,13 +69,18 @@ function searchLabel(){
                     const container = document.createElement("div");
                     container.className = "container";
                     const label = document.createElement("p");
-                    label.className = "imglabel";
+                    label.className = "imgtitolo";
+                    const desc = document.createElement("p");
+                    desc.className = "desc";
                     const img = document.createElement("img");
                     img.crossOrigin = "anonymous";
                     img.style.width = '100%';
                     img.className = "img";
                     img.src = result[i];
+                    label.innerHTML = result[i];  //prova visualizzazione
+                    desc.innerHTML = result[i];  //prova visualizzazione
                     container.appendChild(label);
+                    container.appendChild(desc);
                     newQuadro.appendChild(img);
                     newQuadro.appendChild(container);
                     griglia.appendChild(newQuadro);
