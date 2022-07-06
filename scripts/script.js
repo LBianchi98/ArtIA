@@ -55,6 +55,15 @@ function searchLabel(){
 
     var rpag = document.getElementById("paginaRisultati")
     rpag.classList.toggle("nascosta");
+    
+
+
+   /* var quadro = document.getElementsByClassName('quadro');
+    quadro.remove();*/
+
+    
+    
+    
     if(ricerca){
         fetch("./server/config.php")
             .then(response =>{
@@ -94,4 +103,25 @@ function searchLabel(){
             })
     }
     ricerca = !ricerca;
+}
+
+
+function newSearch(){
+        //implementare il cambio di pagina
+        var spag = document.getElementById("paginaWebcam")
+        spag.classList.toggle("nascosta");
+    
+        var rpag = document.getElementById("paginaRisultati")
+        rpag.classList.toggle("nascosta");
+        
+    
+    
+        const quadro = document.querySelectorAll('.quadro'); //commentare questo se vogliamo vederne di più
+        quadro.forEach(quadro => {
+            quadro.remove();
+        })
+        
+
+        ricerca = !ricerca;
+    
 }

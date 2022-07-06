@@ -48,11 +48,12 @@ h1.ArtIA {
 
 #bottone {
     padding: 14px 28px;
+    margin-bottom: 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
+    margin: 0 0 70px 0;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
