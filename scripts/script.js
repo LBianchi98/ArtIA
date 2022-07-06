@@ -63,23 +63,29 @@ function searchLabel(){
             .then(result => {
                 for(var i= 0; i < result.length; i++)
                 {
+                    const id = result[i][0];
+                    const source = result[i][1];
+                    const titolodb = result[i][2];
+                    const label = result[i][3];
+                    const descrizione = result[i][4];
+
                     const griglia = document.getElementById("griglia");
                     const newQuadro = document.createElement("div");
                     newQuadro.className = "quadro";
                     const container = document.createElement("div");
                     container.className = "container";
-                    const label = document.createElement("p");
-                    label.className = "imgtitolo";
+                    const titolo = document.createElement("p");
+                    titolo.className = "imgtitolo";
                     const desc = document.createElement("p");
                     desc.className = "desc";
                     const img = document.createElement("img");
                     img.crossOrigin = "anonymous";
                     img.style.width = '100%';
                     img.className = "img";
-                    img.src = result[i];
-                    label.innerHTML = result[i];  //prova visualizzazione
-                    desc.innerHTML = result[i];  //prova visualizzazione
-                    container.appendChild(label);
+                    img.src = source;
+                    titolo.innerHTML = titolodb;  //prova visualizzazione
+                    desc.innerHTML = descrizione;  //prova visualizzazione
+                    container.appendChild(titolo);
                     container.appendChild(desc);
                     newQuadro.appendChild(img);
                     newQuadro.appendChild(container);

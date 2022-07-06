@@ -72,13 +72,15 @@ h1.ArtIA {
     flex-wrap: wrap;
     padding-top: 30px;
     padding-bottom: 50px;
+    justify-content: center;
 }
 
 .quadro {
-    flex-basis: 33.33%;
     max-width: 33.33%;
     padding-left: 16px;
     padding-right: 16px;
+    padding-bottom: 25px;
+    position: relative;
 }
 
 .nascosta {
