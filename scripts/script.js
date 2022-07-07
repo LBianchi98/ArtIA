@@ -1,5 +1,5 @@
 var model = undefined;
-//const per tenere variabile di label attuale sia per scrivere in alto che per confrontare
+var lab;
 
 const imgs = document.getElementsByClassName('img');
 cocoSsd.load().then(function (loadedModel) {
@@ -39,14 +39,15 @@ function predictWebcam() {
         for (let n = 0; n < predictions.length; n++) {
             
             if (predictions[n].score > 0.9) /* da vedere il fattore */ {
-                var p = document.getElementById("webcamItem");
-                p.innerHTML = predictions[n].class;
-                
-                var lab = predictions[n].class;
-                
- 
 
-                //store label da passare?
+                lab = predictions[n].class;
+
+                var p = document.getElementById("webcamItem");
+                p.innerHTML = lab;
+
+
+               document.getElementById("label").value = lab;
+
 
             }
         }
@@ -60,6 +61,8 @@ function predictWebcam() {
 
 var ricerca = true;
 function searchLabel(){
+
+    if(lab){    //scrivere messaggio errore magari in console?
     //implementare il cambio di pagina
     var spag = document.getElementById("paginaWebcam")
     spag.classList.toggle("nascosta");
@@ -73,9 +76,14 @@ function searchLabel(){
             video.srcObject= undefined;
         });
     }
+
+    console.log(lab);
+    
+
+
     
     if(ricerca){
-        fetch("./server/config.php")
+        fetch('./server/actions.php?label='+lab+'')
             .then(response =>{
                 return response.json();
             })
@@ -114,10 +122,11 @@ function searchLabel(){
     }
     ricerca = !ricerca;
 }
+}
 
 
 function newSearch(){
-        //implementare il cambio di pagina
+        //cambio di pagina
         if (navigator.mediaDevices.getUserMedia) {
             navigator.mediaDevices.getUserMedia({ video: true })
             .then(function (stream) {
@@ -136,8 +145,6 @@ function newSearch(){
         var rpag = document.getElementById("paginaRisultati")
         rpag.classList.toggle("nascosta");
         
-    
-    
         const quadro = document.querySelectorAll('.quadro'); //commentare questo se vogliamo vederne di più
         quadro.forEach(quadro => {
             quadro.remove();
@@ -145,5 +152,11 @@ function newSearch(){
         
 
         ricerca = !ricerca;
+
+        lab = "";
+        var p = document.getElementById("webcamItem");
+        p.innerHTML = lab;
+
+        document.getElementById("label").value = lab;
     
 }
