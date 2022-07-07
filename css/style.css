@@ -53,7 +53,6 @@ h1.ArtIA {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 0 0 70px 0;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
@@ -105,3 +104,10 @@ h1.ArtIA {
 #subframe {
     display: none;
   }
+
+#errore{
+    color: red;
+    text-decoration: underline;
+    font-size: 18px;
+    margin-bottom: 50px;
+}

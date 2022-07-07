@@ -16,21 +16,19 @@
       <p>L'oggetto è: <span id="webcamItem" style="font-style: italic;"></span></p>
      
      <form action="./server/actions.php" method="GET" target="sub">
-      <input id="label" name="label">
-      <span id="label" style="display: none;"></span>
+      <input id="label" name="label" style="display: none;">
       <button id="bottone" class="Search" onclick="searchLabel()">Cerca immagini</button>
     </form>
+    <p id="errore"></p>
 
-    <iframe id="subframe" name="sub">
 
-    </iframe>
+    <iframe id="subframe" name="sub"></iframe>
    
     </div>
 
 
     <div id="paginaRisultati" class="nascosta">
-        <p class="sottotitolo">Immagini della nostra collezione simili a <span id="label" style="font-style: italic;"></span>
-        </p>
+        <p class="sottotitolo">Immagini della nostra collezione simili a <span id="label1" style="font-style: italic;"></span></p>
 
         <div class="griglia-quadri" id="griglia">
 
