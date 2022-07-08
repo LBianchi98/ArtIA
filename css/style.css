@@ -104,10 +104,3 @@ h1.ArtIA {
 #subframe {
     display: none;
   }
-
-#errore{
-    color: red;
-    text-decoration: underline;
-    font-size: 18px;
-    margin-bottom: 50px;
-}
