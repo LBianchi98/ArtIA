@@ -19,7 +19,22 @@ h1.ArtIA {
 #paginaRisultati .sottotitolo {
     padding-top: 20px;
 }
-
+.btn-login{
+    text-decoration: none;
+    color: black;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.loginForm{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    margin:0 auto;
+}
+.loginForm input{
+    margin-bottom:15px;
+}
 /*
 
 #bottone {
