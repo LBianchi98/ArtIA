@@ -33,21 +33,26 @@ function predictWebcam() {
     if (video.srcObject == undefined) {
         return;
     }
-    model.detect(video).then(function (predictions) {
-        //console.log(predictions);
-        for (let n = 0; n < predictions.length; n++) {
-            if (predictions[n].score > 0.9) /* da vedere il fattore */ {
-                lab = predictions[n].class;
-
-                var p = document.getElementById("webcamItem");
-                p.innerHTML = lab;
-
-                document.getElementById("label").value = lab;
+    if(model){
+        model.detect(video).then(function (predictions) {
+            //console.log(predictions);
+            for (let n = 0; n < predictions.length; n++) {
+                if (predictions[n].score > 0.9) /* da vedere il fattore */ {
+                    lab = predictions[n].class;
+    
+                    var p = document.getElementById("webcamItem");
+                    p.innerHTML = lab;
+    
+                    document.getElementById("label").value = lab;
+                }
             }
-        }
-    });
-    //}
-    window.requestAnimationFrame(predictWebcam);
+        });
+        //}
+        window.requestAnimationFrame(predictWebcam);
+    }else{
+        location.reload();
+    }
+
 }
 
 
@@ -114,9 +119,7 @@ function searchLabel() {
         }
         ricerca = !ricerca;
     } else {
-        const err = document.getElementById("errore");
-        err.innerHTML = "Inquadra in webcam l'oggetto che desideri cercare!";
-        console.log(error);
+        window.alert("Inquadra in webcam l'oggetto che desideri cercare!");
     }
 }
 
