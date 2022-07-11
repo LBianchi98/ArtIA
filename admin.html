@@ -4,12 +4,25 @@
     <meta charset="UTF-8">
   </head>
   <body>
+
+
+
+    <?php 
+    // controllo cookie e casino
+  if(isset($_COOKIE['admin'])){
+    header("location: ./index.html");
+  }
+
+?>
     <h1 class="ArtIA">ArtIA</h1> 
-    <form action="./server/login.php" method="GET" target="sub" class="loginForm">
+    <form action="./server/login.php" method="GET" class="loginForm" name="login">
         <span>Username</span>
         <input id="username" name="username">
         <span>Password</span>
         <input id="psw" name="password" type="password">
         <button id="bottone" class="login">Login</button>
     </form>
+
+     <iframe id="subframe" name="sub"></iframe> 
+
   </body>
