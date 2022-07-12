@@ -19,22 +19,26 @@ h1.ArtIA {
 #paginaRisultati .sottotitolo {
     padding-top: 20px;
 }
-.blogin{
+
+.blogin {
     text-decoration: none;
     color: black;
     position: absolute;
     top: 10px;
     right: 10px;
 }
-.loginForm{
+
+.loginForm {
     display: flex;
     flex-direction: column;
     width: 200px;
-    margin:0 auto;
+    margin: 0 auto;
 }
-.loginForm input{
-    margin-bottom:15px;
+
+.loginForm input {
+    margin-bottom: 15px;
 }
+
 /*
 
 #bottone {
@@ -81,6 +85,10 @@ h1.ArtIA {
     color: white;
 }
 
+.nascosta {
+    visibility: hidden;
+    display: none;
+}
 
 .griglia-quadri {
     display: flex;
@@ -98,29 +106,33 @@ h1.ArtIA {
     position: relative;
 }
 
-.nascosta {
-    visibility: hidden;
-    display: none;
-}
 
-
-.quadro .container .imgtitolo {
+.quadro .container {
     box-sizing: border-box;
-    padding-top: 16px;
-    padding-bottom: 16px;
-}
-
-
-.quadro .container .imgtitolo{
     padding-top: 0px;
     padding-bottom: 0px;
 }
 
+
+.quadro p   {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.quadro button{
+    margin-top: 15px;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+
 #subframe {
     display: none;
-  }
+}
 
 
-  .container-admin{
+.container-admin {
     text-align: center;
-  }
+}

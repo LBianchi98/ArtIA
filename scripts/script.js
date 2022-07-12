@@ -61,23 +61,7 @@ var ricerca = true;
 function searchLabel() {
 
     if (lab) {
-        console.log(lab);
 
-        var spag = document.getElementById("paginaWebcam")
-        spag.classList.toggle("nascosta");
-
-        var rpag = document.getElementById("paginaRisultati")
-        rpag.classList.toggle("nascosta");
-
-        var p = document.getElementById("label1");
-        p.innerHTML = lab;
-
-        if (navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then(function (stream) {
-                    video.srcObject = undefined;
-                });
-        }
 
 
         if (ricerca) {
@@ -86,6 +70,9 @@ function searchLabel() {
                     return response.json();
                 })
                 .then(result => {
+                    if (result.length === 0){
+                        window.alert("Non esistono immagini simili a " + lab + " nella nostra collezione!");
+                    }else{
                     for (var i = 0; i < result.length; i++) {
                         const id = result[i][0];
                         const source = result[i][1];
@@ -115,9 +102,29 @@ function searchLabel() {
                         newQuadro.appendChild(container);
                         griglia.appendChild(newQuadro);
                     }
+                    console.log(lab);
+
+                    var spag = document.getElementById("paginaWebcam")
+                    spag.classList.toggle("nascosta");
+            
+                    var rpag = document.getElementById("paginaRisultati")
+                    rpag.classList.toggle("nascosta");
+            
+                    var p = document.getElementById("label1");
+                    p.innerHTML = lab;
+            
+                    if (navigator.mediaDevices.getUserMedia) {
+                        navigator.mediaDevices.getUserMedia({ video: true })
+                            .then(function (stream) {
+                                video.srcObject = undefined;
+                            });
+                    }
+                    ricerca = !ricerca;
+                
+                }
                 })
+
         }
-        ricerca = !ricerca;
     } else {
         window.alert("Inquadra in webcam l'oggetto che desideri cercare!");
     }
