@@ -5,18 +5,35 @@ const imgs = document.getElementsByClassName('img');
 cocoSsd.load().then(function (loadedModel) {
     var j = 0;
     model = loadedModel;
-    for (var i = 0; i < imgs.length; i++) {
-        model.detect(imgs[i]).then(function (predictions) {
-            var p = document.getElementsByClassName("imglabel");
-            console.log(i);
-            p[j].innerHTML = predictions[0].class;
-            j++;
-        });
-    }
 });
 
 
+function insertImg(){
+    console.log('ciao');
+    if(model == undefined){
+        alert("devi aspettare che il model sia carico");
+    }
+    var source = document.getElementById("imgsource").value;
+    const body = document.getElementsByClassName('container-admin')[0];
+    const img = document.createElement("img");
+    img.crossOrigin = "anonymous";
+    img.style.width = '100%';
+    //img.style.height = '521px';
+    img.style.display = 'none';
+    img.src = source;
+    body.appendChild(img);
+    var label;
+    model.detect(img).then(function (predictions) {
+        label = predictions[0].class;
+        if(label != null){
+        fetch('./server/insert.php?source=' + source + '&label=' + label).then(response =>{
+            console.log('tutto ok');
+        });
+    }
 
+    });
+    
+}
 
 
 
