@@ -1,28 +1,28 @@
 <html>
-  <head> 
-    <link rel="stylesheet" href="./css/style.css">
-    <meta charset="UTF-8">
+  <head>
+    <link rel="stylesheet" href="./css/style.css" />
+    <meta charset="UTF-8" />
+    <title>ArtIa Admin</title>
   </head>
   <body>
+    <h1 class="ArtIA">ArtIA Admin</h1>
+    <div class="container-admin">
+      <button id="bottone">Inserisci nella collezione</button>
+      <form action="./server/actions.php" method="GET" target="sub">
+        <button id="bottone" class="Search" onclick="display_elimina()">
+          Elimina dalla collezione
+        </button>
+      </form>
+    </div>
+    <iframe id="subframe" name="sub"></iframe>
 
+    <div class="griglia-quadri" id="griglia"></div>
+    <!-- Load TensorFlow.js. This is required to use coco-ssd model. -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <!-- Load the coco-ssd model. -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
 
-
-    <?php 
-    // controllo cookie e casino
-  if(isset($_COOKIE['admin'])){
-    header("location: ./index.html");
-  }
-
-?>
-    <h1 class="ArtIA">ArtIA</h1> 
-    <form action="./server/login.php" method="GET" class="loginForm" name="login">
-        <span>Username</span>
-        <input id="username" name="username">
-        <span>Password</span>
-        <input id="psw" name="password" type="password">
-        <button id="bottone" class="login">Login</button>
-    </form>
-
-     <iframe id="subframe" name="sub"></iframe> 
-
+    <!-- Import the page's JavaScript to do some stuff -->
+    <script src="./scripts/admin-scripts.js"></script>
   </body>
+</html>

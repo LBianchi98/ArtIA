@@ -33,23 +33,23 @@ function predictWebcam() {
     if (video.srcObject == undefined) {
         return;
     }
-    if(model){
+    if (model) {
         model.detect(video).then(function (predictions) {
             //console.log(predictions);
             for (let n = 0; n < predictions.length; n++) {
                 if (predictions[n].score > 0.9) /* da vedere il fattore */ {
                     lab = predictions[n].class;
-    
+
                     var p = document.getElementById("webcamItem");
                     p.innerHTML = lab;
-    
+
                     document.getElementById("label").value = lab;
                 }
             }
         });
         //}
         window.requestAnimationFrame(predictWebcam);
-    }else{
+    } else {
         location.reload();
     }
 
@@ -159,3 +159,45 @@ function newSearch() {
 
 }
 
+
+
+
+
+function display_elimina() {
+    fetch('./server/actions.php?label=' + lab + '')
+        .then(response => {
+            return response.json();
+        })
+        .then(result => {
+            for (var i = 0; i < result.length; i++) {
+                const id = result[i][0];
+                const source = result[i][1];
+                const titolodb = result[i][2];
+                const label = result[i][3];
+                const descrizione = result[i][4];
+
+                const griglia = document.getElementById("griglia");
+                const newQuadro = document.createElement("div");
+                newQuadro.className = "quadro";
+                const container = document.createElement("div");
+                container.className = "container";
+                const titolo = document.createElement("p");
+                titolo.className = "imgtitolo";
+                const desc = document.createElement("p");
+                desc.className = "desc";
+                const img = document.createElement("img");
+                img.crossOrigin = "anonymous";
+                img.style.width = '100%';
+                img.className = "img";
+                img.src = source;
+                titolo.innerHTML = titolodb;
+                desc.innerHTML = descrizione;
+                container.appendChild(titolo);
+                container.appendChild(desc);
+                newQuadro.appendChild(img);
+                newQuadro.appendChild(container);
+                griglia.appendChild(newQuadro);
+            }
+        })
+
+}

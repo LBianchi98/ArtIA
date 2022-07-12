@@ -19,7 +19,7 @@ h1.ArtIA {
 #paginaRisultati .sottotitolo {
     padding-top: 20px;
 }
-.btn-login{
+.blogin{
     text-decoration: none;
     color: black;
     position: absolute;
@@ -118,4 +118,9 @@ h1.ArtIA {
 
 #subframe {
     display: none;
+  }
+
+
+  .container-admin{
+    text-align: center;
   }
