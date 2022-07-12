@@ -6,14 +6,17 @@
   </head>
   <body>
     <h1 class="ArtIA">ArtIA Admin</h1>
+    <p style="text-align: center;"><a href="./index.html">Torna alla ricerca</a></p>
     <div class="container-admin">
-      <input type="text" id="imgsource">
       <button id="bottone" onclick="insertImg()">Inserisci nella collezione</button>
       <form action="" method="GET" target="sub">
         <button id="bottone" class="Search" onclick="display_elimina()">
           Elimina dalla collezione
         </button>
       </form>
+      <textarea type="text" id="imgsource"></textarea> <!--da mettere visibili solo dopo aver cliccato inserisci-->
+      <textarea type="text" id="imgtitolo"></textarea> 
+      <textarea type="text" id="imgdesc"></textarea> 
     </div>
     <iframe id="subframe" name="sub"></iframe>
 

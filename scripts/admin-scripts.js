@@ -1,6 +1,6 @@
 var model = undefined;
 var lab = '';
-var asd;
+
 const imgs = document.getElementsByClassName('img');
 cocoSsd.load().then(function (loadedModel) {
     var j = 0;
@@ -14,25 +14,32 @@ function insertImg(){
         alert("devi aspettare che il model sia carico");
     }
     var source = document.getElementById("imgsource").value;
+    var titolo = document.getElementById("imgtitolo").value;
+    var desc = document.getElementById("imgdesc").value;
     const body = document.getElementsByClassName('container-admin')[0];
     const img = document.createElement("img");
     img.crossOrigin = "anonymous";
     img.style.width = '100%';
-    //img.style.height = '521px';
+    img.style.height = '521px';
     img.style.display = 'none';
     img.src = source;
     body.appendChild(img);
     var label;
+    if(source && titolo && desc){
     model.detect(img).then(function (predictions) {
         label = predictions[0].class;
         if(label != null){
-        fetch('./server/insert.php?source=' + source + '&label=' + label).then(response =>{
+        fetch('./server/insert.php?source=' + source + '&label=' + label + '&titolo=' + titolo + '&desc=' + desc).then(response =>{
             console.log('tutto ok');
+            window.alert(titolo + "aggiunta alla collezione!");
         });
+    }else{
+        window.alert("impossibile riconoscere immagine!");
     }
-
     });
-    
+}else{
+    window.alert("Inserisci informazioni immagine!");
+}
 }
 
 
@@ -42,7 +49,6 @@ function display_elimina() {
     quadro.forEach(quadro => {
         quadro.remove();
     })
-
     fetch('./server/actions.php?label=')
         .then(response => {
             return response.json();
