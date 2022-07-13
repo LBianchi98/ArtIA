@@ -1,3 +1,10 @@
+<?php 
+    // controllo cookie e casino
+    if(isset($_COOKIE['admin'])){
+      header("location: ./admin.html");
+     }
+     
+?>
 <html>
   <head> 
     <link rel="stylesheet" href="./css/style.css">
@@ -8,13 +15,7 @@
 
 
 
-    <?php 
-    // controllo cookie e casino
-  if(isset($_COOKIE['admin'])){
-    header("location: ./index.html");
-  }
-
-?>
+    
     <a href="index.html"><h1 class="ArtIA">ArtIA</h1> </a>
     <form action="./server/login.php" method="GET" class="loginForm" name="login">
         <span>Username</span>

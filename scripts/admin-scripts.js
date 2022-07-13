@@ -6,8 +6,18 @@ cocoSsd.load().then(function (loadedModel) {
     var j = 0;
     model = loadedModel;
 });
+function cleanGriglia(){
+    const quadro = document.querySelectorAll('.quadro'); //commentare questo se vogliamo vederne di più
+    quadro.forEach(quadro => {
+        quadro.remove();
+    })
+}
+function displayForm(){
+    cleanGriglia();
+    var div = document.getElementById("insertForm");
+    div.style.display = "inline-flex";
 
-
+}
 function insertImg(){
     console.log('ciao');
     if(model == undefined){
@@ -21,17 +31,24 @@ function insertImg(){
     img.crossOrigin = "anonymous";
     img.style.width = '100%';
     img.style.height = '521px';
-    img.style.display = 'none';
+    img.style.visibility = "hidden";
     img.src = source;
     body.appendChild(img);
     var label;
     if(source && titolo && desc){
+        console.log(img);
     model.detect(img).then(function (predictions) {
         label = predictions[0].class;
         if(label != null){
         fetch('./server/insert.php?source=' + source + '&label=' + label + '&titolo=' + titolo + '&desc=' + desc).then(response =>{
             console.log('tutto ok');
-            window.alert(titolo + "aggiunta alla collezione!");
+            window.alert(titolo + " aggiunta alla collezione!");
+            var div = document.getElementById("insertForm");
+            div.style.display = "none";
+            source = '';
+            label = '';
+            titolo ='';
+            desc = "";
         });
     }else{
         window.alert("impossibile riconoscere immagine!");
@@ -45,10 +62,9 @@ function insertImg(){
 
 
 function display_elimina() {
-    const quadro = document.querySelectorAll('.quadro'); //commentare questo se vogliamo vederne di più
-    quadro.forEach(quadro => {
-        quadro.remove();
-    })
+    var div = document.getElementById("insertForm");
+    div.style.display = "none";
+    cleanGriglia();
     fetch('./server/actions.php?label=')
         .then(response => {
             return response.json();
@@ -58,8 +74,8 @@ function display_elimina() {
                 const id = result[i][0];
                 const source = result[i][1];
                 const titolodb = result[i][2];
-                const labeldb = result[i][3];
-                const descrizionedb = result[i][4];
+                const descrizionedb = result[i][3];
+                const labeldb = result[i][4];
 
                 const griglia = document.getElementById("griglia");
                 const newQuadro = document.createElement("div");
@@ -67,7 +83,7 @@ function display_elimina() {
                 const container = document.createElement("div");
                 container.className = "container";
                 const elimina = document.createElement("button");
-                elimina.id = "elimina-immagine-"+id;
+                elimina.id = id;
                 const label = document.createElement("p");
                 label.className = "imglabel";
                 const titolo = document.createElement("p");
@@ -75,7 +91,6 @@ function display_elimina() {
                 const desc = document.createElement("p");
                 desc.className = "desc";
                 const img = document.createElement("img");
-                img.crossOrigin = "anonymous";
                 img.style.width = '100%';
                 img.className = "img";
                 img.src = source;
@@ -97,22 +112,12 @@ function display_elimina() {
 }
 
 
-function delete_row(id)
+function delete_row()
     {
 
-        var data= {};
-        data.row = id;
-
-/*
-        $.ajax({
-          url: 'delete_formation.php',
-          type: 'POST',
-          data: data,
-
-          success: function(output){
-            //alert(output);
-          }
-        });*/
-        document.getElementById(id).innerHTML="Immagine eliminata";
+        var id = this.id;
+        fetch("./server/delete.php?id=" + id).then(function(){
+            console.log("leo ti prego fai i alert sono un incopetente in ciò");
+        })
     
     }

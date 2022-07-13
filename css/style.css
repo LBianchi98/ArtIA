@@ -142,3 +142,10 @@ h1.ArtIA {
 .container-admin {
     text-align: center;
 }
+#insertForm{
+    display: none;
+    flex-direction: column;
+}
+#insertForm textarea{
+    margin-bottom: 10px;
+ }
