@@ -7,7 +7,7 @@ cocoSsd.load().then(function (loadedModel) {
     model = loadedModel;
 });
 function cleanGriglia() {
-    const quadro = document.querySelectorAll('.quadro'); //commentare questo se vogliamo vederne di più
+    const quadro = document.querySelectorAll('.quadro');
     quadro.forEach(quadro => {
         quadro.remove();
     })
@@ -21,7 +21,6 @@ function displayForm() {
     document.getElementById("imgdesc").value = "";
 }
 function insertImg() {
-    console.log('ciao');
     if (model == undefined) {
         alert("devi aspettare che il model sia carico");
     }
@@ -43,11 +42,9 @@ function insertImg() {
         model.detect(img).then(function (predictions) {
 
             while(predictions[0] != undefined || predictions[0] == undefined){
-                console.log("ao");
                 label = predictions[0].class;
                 if (label != null) {
                     fetch('./server/insert.php?source=' + source + '&label=' + label + '&titolo=' + titolo + '&desc=' + desc)
-                    console.log('tutto ok');
                     window.alert(titolo + " aggiunta alla collezione!");
                     inserita = true;
                     var div = document.getElementById("insertForm");
@@ -60,7 +57,6 @@ function insertImg() {
                     document.getElementById("imgtitolo").value = "";
                     document.getElementById("imgdesc").value = "";
                     if(inserita == true){        
-                        console.log("ao");
                         break;
                     }
                 } else {
@@ -68,7 +64,6 @@ function insertImg() {
                     break;
                 }
                 if(inserita == true){
-                    console.log("ao1");
                     break;
                 }
 

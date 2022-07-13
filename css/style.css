@@ -45,32 +45,6 @@ h1.ArtIA {
     margin-bottom: 15px;
 }
 
-/*
-
-#bottone {
-    outline: none;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    font: bold 17px Arial, Helvetica, sans-serif;
-    color: #fff;
-    padding: 10px 20px;
-    border: solid 1px #0076b3;
-    background: #0095cd;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-}
-
-#bottone:active {
-    position: relative;
-    top: 1px;
-    }
-
-    #bottone:hover {
-        background: #0078a5;
-        }*/
-
 #bottone {
     padding: 14px 28px;
     margin-bottom: 20px;

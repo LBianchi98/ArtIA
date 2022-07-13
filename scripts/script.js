@@ -5,14 +5,6 @@ const imgs = document.getElementsByClassName('img');
 cocoSsd.load().then(function (loadedModel) {
     var j = 0;
     model = loadedModel;
-   /* for (var i = 0; i < imgs.length; i++) {
-        model.detect(imgs[i]).then(function (predictions) {
-            var p = document.getElementsByClassName("imglabel");
-            console.log(i);
-            p[j].innerHTML = predictions[0].class;
-            j++;
-        });
-    }*/
 });
 
 const video = document.getElementById('webcam');
@@ -150,7 +142,7 @@ function newSearch() {
     var rpag = document.getElementById("paginaRisultati")
     rpag.classList.toggle("nascosta");
 
-    const quadro = document.querySelectorAll('.quadro'); //commentare questo se vogliamo vederne di più
+    const quadro = document.querySelectorAll('.quadro');
     quadro.forEach(quadro => {
         quadro.remove();
     })
