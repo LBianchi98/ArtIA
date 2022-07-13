@@ -6,21 +6,23 @@ cocoSsd.load().then(function (loadedModel) {
     var j = 0;
     model = loadedModel;
 });
-function cleanGriglia(){
+function cleanGriglia() {
     const quadro = document.querySelectorAll('.quadro'); //commentare questo se vogliamo vederne di più
     quadro.forEach(quadro => {
         quadro.remove();
     })
 }
-function displayForm(){
+function displayForm() {
     cleanGriglia();
     var div = document.getElementById("insertForm");
     div.style.display = "inline-flex";
-
+    document.getElementById("imgsource").value = "";
+    document.getElementById("imgtitolo").value = "";
+    document.getElementById("imgdesc").value = "";
 }
-function insertImg(){
+function insertImg() {
     console.log('ciao');
-    if(model == undefined){
+    if (model == undefined) {
         alert("devi aspettare che il model sia carico");
     }
     var source = document.getElementById("imgsource").value;
@@ -35,28 +37,49 @@ function insertImg(){
     img.src = source;
     body.appendChild(img);
     var label;
-    if(source && titolo && desc){
+    var inserita = false;
+    if (source && titolo && desc) {
         console.log(img);
-    model.detect(img).then(function (predictions) {
-        label = predictions[0].class;
-        if(label != null){
-        fetch('./server/insert.php?source=' + source + '&label=' + label + '&titolo=' + titolo + '&desc=' + desc).then(response =>{
-            console.log('tutto ok');
-            window.alert(titolo + " aggiunta alla collezione!");
-            var div = document.getElementById("insertForm");
-            div.style.display = "none";
-            source = '';
-            label = '';
-            titolo ='';
-            desc = "";
+        model.detect(img).then(function (predictions) {
+
+            while(predictions[0] != undefined || predictions[0] == undefined){
+                console.log("ao");
+                label = predictions[0].class;
+                if (label != null) {
+                    fetch('./server/insert.php?source=' + source + '&label=' + label + '&titolo=' + titolo + '&desc=' + desc)
+                    console.log('tutto ok');
+                    window.alert(titolo + " aggiunta alla collezione!");
+                    inserita = true;
+                    var div = document.getElementById("insertForm");
+                    div.style.display = "none";
+                    source = '';
+                    label = '';
+                    titolo = '';
+                    desc = "";
+                    document.getElementById("imgsource").value = "";
+                    document.getElementById("imgtitolo").value = "";
+                    document.getElementById("imgdesc").value = "";
+                    if(inserita == true){        
+                        console.log("ao");
+                        break;
+                    }
+                } else {
+                    window.alert("impossibile riconoscere immagine!");
+                    break;
+                }
+                if(inserita == true){
+                    console.log("ao1");
+                    break;
+                }
+
+        }
+    
         });
-    }else{
-        window.alert("impossibile riconoscere immagine!");
+    } else {
+        window.alert("Inserisci informazioni immagine!");
     }
-    });
-}else{
-    window.alert("Inserisci informazioni immagine!");
-}
+    img.style.display = "none";
+    inserita = false;
 }
 
 
@@ -74,12 +97,12 @@ function display_elimina() {
                 const id = result[i][0];
                 const source = result[i][1];
                 const titolodb = result[i][2];
-                const descrizionedb = result[i][3];
-                const labeldb = result[i][4];
+                const labeldb = result[i][3];
+                const descrizionedb = result[i][4];
 
                 const griglia = document.getElementById("griglia");
                 const newQuadro = document.createElement("div");
-                newQuadro.className = "quadro";
+                newQuadro.classList.add('quadro', 'id-' + id);
                 const container = document.createElement("div");
                 container.className = "container";
                 const elimina = document.createElement("button");
@@ -96,9 +119,9 @@ function display_elimina() {
                 img.src = source;
                 elimina.onclick = delete_row;
                 elimina.innerHTML = "Elimina questa immagine dalla collezione";
-                titolo.innerHTML = "Titolo: "+titolodb;
-                label.innerHTML = "Label: "+labeldb;
-                desc.innerHTML = "Descrizione: "+descrizionedb;
+                titolo.innerHTML = "Titolo: " + titolodb;
+                label.innerHTML = "Label: " + labeldb;
+                desc.innerHTML = "Descrizione: " + descrizionedb;
                 container.appendChild(elimina);
                 container.appendChild(label);
                 container.appendChild(titolo);
@@ -112,12 +135,22 @@ function display_elimina() {
 }
 
 
-function delete_row()
-    {
+function delete_row() {
 
-        var id = this.id;
-        fetch("./server/delete.php?id=" + id).then(function(){
-            console.log("leo ti prego fai i alert sono un incopetente in ciò");
+    var id = this.id;
+
+    if (confirm("Vuoi davvero eliminare questa immagine?") == true) {
+
+        fetch("./server/delete.php?id=" + id).then(function () {
+            var quadro = document.getElementsByClassName('id-' + id);
+            quadro.forEach(quadro => {
+                quadro.remove();
+            })
+            alert("Immagine eliminata con successo");
+            console.log("Immagine eliminata con successo");
         })
-    
+    } else {
+                alert("Immagine non eliminata");
+                console.log("Immagine non eliminata");
+            }
     }
