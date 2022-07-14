@@ -117,18 +117,17 @@ h1.ArtIA {
 .container-admin {
     text-align: center;
 }
-#insertForm{
+#insertSrc, 
+#insertData{
     display: none;
     flex-direction: column;
 }
-#insertForm textarea{
+.container-admin textarea{
     margin-bottom: 10px;
  }
  textarea {
     resize: none;
   }
-
-
   @media screen and (max-width: 768px)  {
     #webcam{
         max-width: 100%;

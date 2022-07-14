@@ -14,88 +14,101 @@ function cleanGriglia() {
 }
 function displayForm() {
     cleanGriglia();
-    var div = document.getElementById("insertForm");
+    var div = document.getElementById("insertSrc");
     div.style.display = "inline-flex";
     document.getElementById("imgsource").value = "";
     document.getElementById("imgtitolo").value = "";
     document.getElementById("imgdesc").value = "";
+    document.getElementById("insertData").style.display = "none";
+    document.getElementById('imgtoinsert').remove();
 }
-function insertImg() {
+var img;
+function insertSrc() {
     if (model == undefined) {
         alert("devi aspettare che il model sia carico");
     }else{
         var source = document.getElementById("imgsource").value;
-        var titolo = document.getElementById("imgtitolo").value;
-        var desc = document.getElementById("imgdesc").value;
-        const body = document.getElementsByClassName('container-admin')[0];
-        const img = document.createElement("img");
+        if(source){
+        const body = document.getElementById('insertData');
+        img = document.createElement("img");
         img.crossOrigin = "anonymous";
-        img.style.width = '100%';
-        img.style.height = '521px';
-        img.style.visibility = "hidden";
+        img.style.width = '325px';
+        img.style.marginBottom = "10px";
         img.src = source;
-        body.appendChild(img);
-        var label;
-        var inserita = false;
-        if (source && titolo && desc) {
-            console.log(img);
-            model.detect(img).then(function (predictions) {
-                var i =0 ;
-                while(predictions[0] != undefined || predictions[0] == undefined){
-                    if(predictions[0] == undefined){
-                        i = i+1;
-                        if(i==10000){
-                            window.alert("Impossibile riconoscere immagine! Prova con un'altra immagine");
-                            break;
-                        }
-                    } else{
-                        label = predictions[0].class;
-                        if (label != null) {
-                            fetch('./server/insert.php?source=' + source + '&label=' + label + '&titolo=' + titolo + '&desc=' + desc)
-                            window.alert(titolo + " aggiunta alla collezione!");
-                            inserita = true;
-                            var div = document.getElementById("insertForm");
-                            div.style.display = "none";
-                            source = '';
-                            label = '';
-                            titolo = '';
-                            desc = "";
-                            document.getElementById("imgsource").value = "";
-                            document.getElementById("imgtitolo").value = "";
-                            document.getElementById("imgdesc").value = "";
-                            if(inserita == true){        
-                                break;
-                            }
-                            
-                        } else {
-                            window.alert("impossibile riconoscere immagine!");
-                            break;
-                        }
-    
-    
-                    }
-    
-    
-                    if(inserita == true){
-                        break;
-                    }
-    
-            }
+        img.id = 'imgtoinsert';
+        img.onerror = function(e) {
+            
+            alert('Url non valido!');
+        };
+        img.onload  = function(e) {
+            body.insertAdjacentElement('afterbegin', img);
+            var data = document.getElementById('insertData');
+            data.style.display = "inline-flex";
+            document.getElementById('insertSrc').style.display = 'none';
+            document.getElementById("imgsource").value = "";
+        };
+    } else{
+        window.alert("Inserisci l'url dell'immagine!");
+    }
         
-            });
-        } else {
-            window.alert("Inserisci informazioni immagine!");
-        }
-        img.style.display = "none";
-        inserita = false;
     }
 
 }
+function insertImg(){
+    var titolo = document.getElementById("imgtitolo").value;
+    var desc = document.getElementById("imgdesc").value;
+    if (titolo && desc) {
+        console.log(img);
+        model.detect(img).then(function (predictions) {
+            var i =0 ;
+            while(predictions[0] != undefined || predictions[0] == undefined){
+                if(predictions[0] == undefined){
+                    i = i+1;
+                    if(i==10000){
+                        window.alert("Impossibile riconoscere immagine! Prova con un'altra immagine");
+                        break;
+                    }
+                } else{
+                    label = predictions[0].class;
+                    if (label != null) {
+                        fetch('./server/insert.php?source=' + img.src + '&label=' + label + '&titolo=' + titolo + '&desc=' + desc)
+                        window.alert(titolo + " aggiunta alla collezione!");
+                        var div = document.getElementById("insertSrc");
+                        div.style.display = "none";
+                        label = '';
+                        titolo = '';
+                        desc = "";
+                        document.getElementById("imgtitolo").value = "";
+                        document.getElementById("imgdesc").value = "";
+                        if(inserita == true){        
+                            break;
+                        }
+                        
+                    } else {
+                        window.alert("impossibile riconoscere immagine!");
+                        break;
+                    }
 
+
+                }
+
+
+                if(inserita == true){
+                    break;
+                }
+
+        }
+    
+        });
+    } else {
+        window.alert("Inserisci informazioni immagine!");
+    }
+}
 
 
 function display_elimina() {
-    var div = document.getElementById("insertForm");
+    var div = document.getElementById("insertSrc");
+    document.getElementById("insertData").style.display = "none";
     div.style.display = "none";
     cleanGriglia();
     fetch('./server/actions.php?label=')

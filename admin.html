@@ -14,12 +14,17 @@
           Elimina dalla collezione
         </button>
       </form>
-      <div id="insertForm" style="display: none; flex-direction: column">
-        <p></p>
-        <textarea type="text" id="imgsource" rows="5" cols="40" placeholder="Sorgente immagine"></textarea> <!--placeholder-->
-        <textarea type="text" id="imgtitolo" rows="5" cols="40" placeholder="Titolo"></textarea> 
-        <textarea type="text" id="imgdesc" rows="5" cols="40" placeholder="Descrizione"></textarea> 
-        <button id="bottone" onclick="insertImg()">Inserire</button>
+      <div style="display: inline-flex; flex-direction: column;">
+        <div id="insertSrc" style="display: none; flex-direction: column">
+          <p></p>
+          <textarea type="text" id="imgsource" rows="5" cols="40" placeholder="Sorgente immagine"></textarea> <!--placeholder-->
+          <button id="bottone" onclick="insertSrc()">Inserire</button>
+        </div>
+        <div id="insertData" style="display: none; flex-direction: column">
+          <textarea type="text" id="imgtitolo" rows="5" cols="40" placeholder="Titolo"></textarea> 
+          <textarea type="text" id="imgdesc" rows="5" cols="40" placeholder="Descrizione"></textarea> 
+          <button id="bottone" onclick="insertImg()">Inserire</button>
+        </div>
       </div>
     </div>
     <iframe id="subframe" name="sub"></iframe>
