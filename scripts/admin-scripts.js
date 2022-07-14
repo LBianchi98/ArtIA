@@ -23,58 +23,74 @@ function displayForm() {
 function insertImg() {
     if (model == undefined) {
         alert("devi aspettare che il model sia carico");
-    }
-    var source = document.getElementById("imgsource").value;
-    var titolo = document.getElementById("imgtitolo").value;
-    var desc = document.getElementById("imgdesc").value;
-    const body = document.getElementsByClassName('container-admin')[0];
-    const img = document.createElement("img");
-    img.crossOrigin = "anonymous";
-    img.style.width = '100%';
-    img.style.height = '521px';
-    img.style.visibility = "hidden";
-    img.src = source;
-    body.appendChild(img);
-    var label;
-    var inserita = false;
-    if (source && titolo && desc) {
-        console.log(img);
-        model.detect(img).then(function (predictions) {
-
-            while(predictions[0] != undefined || predictions[0] == undefined){
-                label = predictions[0].class;
-                if (label != null) {
-                    fetch('./server/insert.php?source=' + source + '&label=' + label + '&titolo=' + titolo + '&desc=' + desc)
-                    window.alert(titolo + " aggiunta alla collezione!");
-                    inserita = true;
-                    var div = document.getElementById("insertForm");
-                    div.style.display = "none";
-                    source = '';
-                    label = '';
-                    titolo = '';
-                    desc = "";
-                    document.getElementById("imgsource").value = "";
-                    document.getElementById("imgtitolo").value = "";
-                    document.getElementById("imgdesc").value = "";
-                    if(inserita == true){        
+    }else{
+        var source = document.getElementById("imgsource").value;
+        var titolo = document.getElementById("imgtitolo").value;
+        var desc = document.getElementById("imgdesc").value;
+        const body = document.getElementsByClassName('container-admin')[0];
+        const img = document.createElement("img");
+        img.crossOrigin = "anonymous";
+        img.style.width = '100%';
+        img.style.height = '521px';
+        img.style.visibility = "hidden";
+        img.src = source;
+        body.appendChild(img);
+        var label;
+        var inserita = false;
+        if (source && titolo && desc) {
+            console.log(img);
+            model.detect(img).then(function (predictions) {
+                var i =0 ;
+                while(predictions[0] != undefined || predictions[0] == undefined){
+                    if(predictions[0] == undefined){
+                        i = i+1;
+                        if(i==5){
+                            window.alert("Impossibile riconoscere immagine! Prova con un'altra immagine");
+                            break;
+                        }
+                    } else{
+                        label = predictions[0].class;
+    
+                        if (label != null) {
+                            fetch('./server/insert.php?source=' + source + '&label=' + label + '&titolo=' + titolo + '&desc=' + desc)
+                            window.alert(titolo + " aggiunta alla collezione!");
+                            inserita = true;
+                            var div = document.getElementById("insertForm");
+                            div.style.display = "none";
+                            source = '';
+                            label = '';
+                            titolo = '';
+                            desc = "";
+                            document.getElementById("imgsource").value = "";
+                            document.getElementById("imgtitolo").value = "";
+                            document.getElementById("imgdesc").value = "";
+                            if(inserita == true){        
+                                break;
+                            }
+                            
+                        } else {
+                            window.alert("impossibile riconoscere immagine!");
+                            break;
+                        }
+    
+    
+                    }
+    
+    
+                    if(inserita == true){
                         break;
                     }
-                } else {
-                    window.alert("impossibile riconoscere immagine!");
-                    break;
-                }
-                if(inserita == true){
-                    break;
-                }
-
-        }
     
-        });
-    } else {
-        window.alert("Inserisci informazioni immagine!");
+            }
+        
+            });
+        } else {
+            window.alert("Inserisci informazioni immagine!");
+        }
+        img.style.display = "none";
+        inserita = false;
     }
-    img.style.display = "none";
-    inserita = false;
+
 }
 
 
