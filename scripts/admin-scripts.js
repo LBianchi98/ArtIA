@@ -44,13 +44,12 @@ function insertImg() {
                 while(predictions[0] != undefined || predictions[0] == undefined){
                     if(predictions[0] == undefined){
                         i = i+1;
-                        if(i==5){
+                        if(i==10000){
                             window.alert("Impossibile riconoscere immagine! Prova con un'altra immagine");
                             break;
                         }
                     } else{
                         label = predictions[0].class;
-    
                         if (label != null) {
                             fetch('./server/insert.php?source=' + source + '&label=' + label + '&titolo=' + titolo + '&desc=' + desc)
                             window.alert(titolo + " aggiunta alla collezione!");
