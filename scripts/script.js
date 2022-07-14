@@ -67,6 +67,7 @@ function searchLabel() {
                 .then(result => {
                     if (result.length === 0){
                         window.alert("Non esistono immagini simili a " + lab + " nella nostra collezione!");
+                        trovata = false;
                     }else{
                     for (var i = 0; i < result.length; i++) {
                         const id = result[i][0];
