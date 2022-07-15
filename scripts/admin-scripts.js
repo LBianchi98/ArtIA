@@ -60,45 +60,28 @@ function insertImg(){
     if (titolo && desc) {
         console.log(img);
         model.detect(img).then(function (predictions) {
-            var i =0 ;
-            while(predictions[0] != undefined || predictions[0] == undefined){
                 if(predictions[0] == undefined){
-                    i = i+1;
-                    if(i==10000){
-                        window.alert("Impossibile riconoscere immagine! Prova con un'altra immagine");
-                        break;
-                    }
                 } else{
                     label = predictions[0].class;
                     if (label != null) {
                         fetch('./server/insert.php?source=' + img.src + '&label=' + label + '&titolo=' + titolo + '&desc=' + desc)
                         window.alert(titolo + " aggiunta alla collezione!");
-                        var div = document.getElementById("insertSrc");
+                        var div = document.getElementById("insertData");
                         div.style.display = "none";
                         label = '';
                         titolo = '';
                         desc = "";
                         document.getElementById("imgtitolo").value = "";
                         document.getElementById("imgdesc").value = "";
-                        if(inserita == true){        
-                            break;
-                        }
+            
                         
                     } else {
                         window.alert("impossibile riconoscere immagine!");
-                        break;
+                    
                     }
 
 
                 }
-
-
-                if(inserita == true){
-                    break;
-                }
-
-        }
-    
         });
     } else {
         window.alert("Inserisci informazioni immagine!");

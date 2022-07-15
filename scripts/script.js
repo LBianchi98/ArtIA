@@ -1,7 +1,6 @@
 var model = undefined;
 var lab;
 var trovata = false;
-const imgs = document.getElementsByClassName('img');
 cocoSsd.load().then(function (loadedModel) {
     var j = 0;
     model = loadedModel;
@@ -21,24 +20,18 @@ if (navigator.mediaDevices.getUserMedia) {
 }
 
 function predictWebcam() {
-    //  if(video.srcObject.active == true){
     if (video.srcObject == undefined) {
         return;
     }
     if (model) {
         model.detect(video).then(function (predictions) {
-            //console.log(predictions);
+            
             for (let n = 0; n < predictions.length; n++) {
-                if (predictions[n].score > 0.85 && trovata == false) /* da vedere il fattore */ {
+                if (predictions[n].score > 0.85 && trovata == false) {
                     lab = predictions[n].class;
                     trovata = true;
                     searchLabel();
                     
-
-                   /* var p = document.getElementById("webcamItem");
-                    p.innerHTML = lab;
-
-                    document.getElementById("label").value = lab;*/
                 }
             }
         });
@@ -54,11 +47,7 @@ function predictWebcam() {
 
 var ricerca = true;
 function searchLabel() {
-
     if (lab) {
-
-
-
         if (ricerca) {
             fetch('./server/actions.php?label=' + lab + '')
                 .then(response => {
@@ -129,7 +118,6 @@ function searchLabel() {
 
 function newSearch() {
     trovata = false;
-    //cambio di pagina
     if (navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices.getUserMedia({ video: true })
             .then(function (stream) {
