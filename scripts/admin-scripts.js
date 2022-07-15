@@ -61,6 +61,7 @@ function insertImg(){
         console.log(img);
         model.detect(img).then(function (predictions) {
                 if(predictions[0] == undefined){
+                    window.alert("impossibile riconoscere immagine!");
                 } else{
                     label = predictions[0].class;
                     if (label != null) {
