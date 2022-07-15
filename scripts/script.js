@@ -35,7 +35,6 @@ function predictWebcam() {
                 }
             }
         });
-        //}
         window.requestAnimationFrame(predictWebcam);
     } else {
         location.reload();
